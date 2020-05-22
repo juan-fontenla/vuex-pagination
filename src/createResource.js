@@ -177,8 +177,13 @@ module.exports = function (name, fetchPage, opts) {
           dispatch('cleanupRegistries')
         })
       },
-      removeInstance: function ({ commit, state }) {
-        // todo: remove instance
+      removeInstances: async function ({ commit, state }) {
+        if (state.currentRequest) await state.currentRequest
+
+        let instancesId = Object.keys(state.instances);
+
+        commit('removeInstances', instancesId)
+        
       },
       prefetchNextPage: async function ({ commit, state }, instanceConfig) {
         if (state.currentRequest) await state.currentRequest
@@ -286,6 +291,11 @@ module.exports = function (name, fetchPage, opts) {
       removeRegistries: function (state, keys) {
         keys.map((key) => {
           getVueDelete()(state.registry, key)
+        })
+      },
+      removeInstances: function (state, keys) {
+        keys.map((key) => {
+          getVueDelete()(state.instances, key)
         })
       },
       setInstanceConfig: function (state, opts) {
