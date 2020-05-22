@@ -3,6 +3,7 @@ const { getRootModuleName } = require('./rootModuleName')
 const hash = require('object-hash')
 const isEqual = require('lodash.isequal')
 const { getVueSet } = require('./util')
+const { getVueDelete } = require('./util')
 
 module.exports = function (name, fetchPage, opts) {
   let instanceCache = {}
@@ -284,7 +285,7 @@ module.exports = function (name, fetchPage, opts) {
       },
       removeRegistries: function (state, keys) {
         keys.map((key) => {
-          Vue.delete(state.registry, key)
+          getVueDelete()(state.registry, key)
         })
       },
       setInstanceConfig: function (state, opts) {

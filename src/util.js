@@ -1,5 +1,15 @@
 let VueSet = null
 
+let VueDelete = null
+
+module.exports.setVueDelete = function (vueDelete) {
+  VueDelete = vueDelete
+}
+
+module.exports.getVueDelete = function () {
+  return VueDelete
+}
+
 module.exports.setVueSet = function (vueSet) {
   VueSet = vueSet
 }

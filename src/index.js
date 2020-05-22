@@ -2,6 +2,7 @@ const createInstance = require('./createInstance')
 const { getRootModuleName } = require('./rootModuleName')
 const createResource = require('./createResource')
 const { setVueSet } = require('./util')
+const { setVueDelete } = require('./util')
 
 var initialResources = []
 var initializedStore = null
@@ -34,6 +35,7 @@ function initializeStore (store) {
 module.exports.PaginationPlugin = {
   install: function (Vue, opts) {
     setVueSet(Vue.set.bind(Vue))
+    setVueDelete(Vue.delete.bind(Vue))
     initializedStore = null
     Vue.mixin({
       beforeMount: function () {
