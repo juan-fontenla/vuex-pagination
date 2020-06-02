@@ -136,6 +136,9 @@ function createController (name) {
         if (mutationType === event) cb(mutation.payload)
       })
     },
+    removeInstances: function () {
+      return _store.dispatch([getRootModuleName(), name, 'removeInstances'].join('/'))
+    },
     instance: function (id) {
       return _store.getters[[getRootModuleName(), name, 'instance'].join('/')](id)
     }
