@@ -155,7 +155,13 @@ module.exports = function (name, fetchPage, opts) {
       },
       updateInstance: function ({ commit, state, dispatch }, opts) {
         if (!state.instances[opts.id]) {
-          instanceConfigQueue[opts.id] = opts
+          instanceConfigQueue[opts.id] = instanceConfigQueue[opts.id] || {};
+          let keys = Object.keys(opts);
+          keys.forEach(key => {
+            if (key != "id") {
+              instanceConfigQueue[opts.id][key] = opts[key];
+            }
+          });
           return
         }
         let newInstance = Object.assign({}, state.instances[opts.id], opts)
